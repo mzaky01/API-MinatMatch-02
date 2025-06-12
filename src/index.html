@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dokumentasi API</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+      background-color: #fff;
+    }
+
+    header,
+    section,
+    main,
+    footer {
+      margin-bottom: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1,
+    h2 {
+      color: #2c3e50;
+    }
+
+    pre {
+      background: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+
+    code {
+      font-family: monospace;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Dokumentasi API</h1>
+  </header>
+
+  <main>
+    <article>
+      <h2>POST /register</h2>
+      <h3>Body</h3>
+      <pre><code>{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "123456"
+}
+</code></pre>
+
+      <h3>Respons Berhasil</h3>
+      <pre><code>{
+  "status": "success",
+  "message": "Registration successful."
+}</code></pre>
+    </article>
+
+    <article>
+      <h2>POST /login</h2>
+      <h3>Body</h3>
+      <pre><code>{
+  "email": "john@example.com",
+  "password": "123456"
+}</code></pre>
+
+      <h3>Respons Berhasil</h3>
+      <pre><code>{
+  "status": "success",
+  "data": {
+    "token": "jwt_token_here"
+  }
+}</code></pre>
+    </article>
+
+    <article>
+      <h2>GET /prediction-history</h2>
+      <h3>Header</h3>
+      <pre><code>Authorization: Bearer &lt;token&gt;</code></pre>
+      <h3>Respons Berhasil</h3>
+      <pre><code>{
+  "status": "success",
+  "data": [
+    {
+      "_id": "665f1b...",
+      "userId": "665f1a...",
+      "name": "John Doe",
+      "predictions": [
+        { "career": "Data Scientist", "probability": 0.45 },
+        { "career": "Web Developer", "probability": 0.32 },
+        { "career": "QA Engineer", "probability": 0.23 }
+      ],
+      "createdAt": "2025-06-05T10:00:00.000Z"
+    },
+  ]
+}</code></pre>
+    </article>
+
+    <article>
+      <h2>DELETE /prediction-history</h2>
+      <h3>Header</h3>
+      <pre><code>Authorization: Bearer &lt;token&gt;</code></pre>
+      <h3>Respons Berhasil</h3>
+      <pre><code>{
+  "status": "success",
+  "message": "Prediction history deleted successfully"
+}</code></pre>
+    </article>
+
+    <article>
+      <h2>DELETE /prediction-history/{id}</h2>
+      <h3>Header</h3>
+      <pre><code>Authorization: Bearer &lt;token&gt;</code></pre>
+      <h3>Respons Berhasil</h3>
+      <pre><code>{
+  "status": "success",
+  "message": "Prediction deleted successfully"
+}</code></pre>
+    </article>
+
+    <article>
+      <h2>POST /predict</h2>
+      <h3>Header</h3>
+      <pre><code>Authorization: Bearer &lt;token&gt;</code></pre>
+      <h3>Body</h3>
+      <pre><code>{
+  "name": "John Doe" 
+}</code></pre>
+      <h3>Respons Berhasil</h3>
+      <pre><code>{
+  "status": "success",
+  "data": {
+    "name": "John Doe",
+    "predictions": [
+      { "career": "Data Scientist", "probability": 0.45 },
+      { "career": "Web Developer", "probability": 0.32 },
+      { "career": "QA Engineer", "probability": 0.23 }
+    ]
+  }
+}</code></pre>
+    </article>
+
+    <article>
+      <h2>GET /profile</h2>
+      <h3>Header</h3>
+      <pre><code>Authorization: Bearer &lt;token&gt;</code></pre>
+      <h3>Respons Berhasil</h3>
+      <pre><code>{
+  "status": "success",
+  "data": {
+    "name": "John Doe",
+    "email": "john@example.com",
+    "profilePic": "data:image/png;base64,..." // null jika belum upload gambar
+  }
+}</code></pre>
+    </article>
+
+    <article>
+      <h2>PUT /profile</h2>
+      <h3>Header</h3>
+      <pre><code>Authorization: Bearer &lt;token&gt;</code></pre>
+      <h3>Body (form-data)</h3>
+      <pre><code>name: John Doe (text)
+email: john@example.com (text)
+profilePic: file</code></pre>
+      <h3>Respons Berhasil</h3>
+      <pre><code>{
+  "status": "success",
+  "message": "Profile updated successfully.",
+  "data": {
+    "name": "John Doe",
+    "email": "john@example.com",
+    "profilePic": "data:image/png;base64,..."
+  }
+}</code></pre>
+    </article>
+
+    <article>
+      <h2>POST /change-password</h2>
+      <h3>Header</h3>
+      <pre><code>Authorization: Bearer &lt;token&gt;</code></pre>
+      <h3>Body</h3>
+      <pre><code>{
+  "oldPassword": "password_lama",
+  "newPassword": "password_baru"
+}</code></pre>
+      <h3>Respons Berhasil</h3>
+      <pre><code>{
+  "status": "success",
+  "message": "Password changed successfully."
+}</code></pre>
+    </article>
+
+    <article>
+      <h2>DELETE /account</h2>
+      <h3>Header</h3>
+      <pre><code>Authorization: Bearer &lt;token&gt;</code></pre>
+      <h3>Respons Berhasil</h3>
+      <pre><code>{
+  "status": "success",
+  "message": "Account and all related data deleted successfully."
+}</code></pre>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 MinatMatch.Ai — Dokumentasi API.</p>
+  </footer>
+</body>
+
+</html>
